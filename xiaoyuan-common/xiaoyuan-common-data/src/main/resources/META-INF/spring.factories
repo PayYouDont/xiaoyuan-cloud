@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+    com.gospell.xiaoyuan.cloud.common.data.cache.RedisTemplateConfig,\
+    com.gospell.xiaoyuan.cloud.common.data.cache.RedisCacheManagerConfig,\
+    com.gospell.xiaoyuan.cloud.common.data.cache.RedisCacheAutoConfiguration

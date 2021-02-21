@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>xiaoyuan-cloud</artifactId>
+        <groupId>com.gospell</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>xiaoyuan-gateway</artifactId>
+    <packaging>jar</packaging>
+    <description>服务网关</description>
+    <dependencies>
+        <!--gateway 网关依赖,内置webflux 依赖-->
+        <!--<dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
+        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
+        </dependency>
+        <!--注册中心客户端-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <!--配置中心客户端-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+
+        <!--验证码-->
+        <dependency>
+            <groupId>com.github.axet</groupId>
+            <artifactId>kaptcha</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.gospell</groupId>
+            <artifactId>xiaoyuan-common-core</artifactId>
+        </dependency>
+        <!--缓存-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <!--接口文档-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.springfox</groupId>
+                    <artifactId>springfox-spring-web</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>swagger-bootstrap-ui</artifactId>
+            <version>1.9.6</version>
+        </dependency>
+            <!--网关服务不能有web依赖-->
+        <!--<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-undertow</artifactId>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+           <!-- <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+            </plugin>-->
+
+            <!--打包时复制jar包到指定文件目录-->
+           <!-- <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy</id>&lt;!&ndash;需要唯一&ndash;&gt;
+                        <phase>package</phase>&lt;!&ndash;当执行package操作时执行一下任务&ndash;&gt;
+                        <configuration>
+                            <tasks>&lt;!&ndash;任务&ndash;&gt;
+                                <echo message="start.................................."/>&lt;!&ndash;打印&ndash;&gt;
+                                <echo message="load maven plugin ant-contrib-1.0b3"/>
+                                &lt;!&ndash;加载plugin ant-contrib的配置文件&ndash;&gt;
+                                <taskdef resource="net/sf/antcontrib/antlib.xml">
+                                    <classpath>&lt;!&ndash;加载jar包,${settings.localRepository}的值是你maven settings文件中配置的本地仓库位置&ndash;&gt;
+                                        <pathelement location="${settings.localRepository}/ant-contrib/ant-contrib/1.0b3/ant-contrib-1.0b3.jar"/>
+                                    </classpath>
+                                </taskdef>
+                                &lt;!&ndash;复制jar包&ndash;&gt;
+                                <if>
+                                    <equals arg1="${copy}" arg2="true"/>&lt;!&ndash;是否复制jar包&ndash;&gt;
+                                    <then>
+                                        <echo message="Copy jar to your desired path."/>
+                                        <copy todir="${localDir}" overwrite="true">&lt;!&ndash;执行复制操作,todir的值是将要复制jar包到的地方,overwrite是否重写&ndash;&gt;
+                                            <fileset dir="${project.build.directory}">&lt;!&ndash;${project.build.directory}值是你的target目录&ndash;&gt;
+                                                <include name="*.jar"/>&lt;!&ndash;target目录下的jar包&ndash;&gt;
+                                            </fileset>
+                                        </copy>
+                                    </then>
+                                </if>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>-->
+        </plugins>
+    </build>
+</project>

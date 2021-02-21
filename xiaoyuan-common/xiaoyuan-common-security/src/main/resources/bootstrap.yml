@@ -1,0 +1,24 @@
+server:
+  port: 5000
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: auth
+  # 配置中心
+  cloud:
+    nacos:
+      discovery:
+        username: nacos
+        password: nacos
+        server-addr: ${spring.cloud.nacos.server-addr}
+        #namespace: b693f8f0-49f0-484c-b248-4654e5a157c6
+        group: DEFAULT_GROUP
+      config:
+        server-addr: ${spring.cloud.nacos.server-addr}
+        file-extension: yml
+        shared-configs: application-auth-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+      server-addr: 127.0.0.1:8848
+  profiles:
+    active: dev

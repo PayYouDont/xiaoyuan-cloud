@@ -1,0 +1,74 @@
+routes:
+# xiaoyuan-auth
+- id: xiaoyuan-auth
+  predicates:
+  - name: Path
+    args:
+      _genkey_0: /auth/**
+  filters:
+  - name: ValidateCodeGatewayFilter
+    args: {}
+  - name: PasswordDecoderFilter
+    args: {}
+  uri: lb://xiaoyuan-auth
+  order: 0
+# xiaoyuan-upms-admin
+- id: xiaoyuan-upms-admin
+  predicates:
+  - name: Path
+    args:
+      _genkey_0: /upms/**
+  filters:
+  - name: RequestRateLimiter
+    args:
+      # 限流策略
+      key-resolver: '#{@remoteAddrKeyResolver}'
+      # 令牌桶每秒填充率
+      redis-rate-limiter.burstCapacity: 20
+      # 令牌桶容量
+      redis-rate-limiter.replenishRate: 20
+  # 熔断
+  - name: Hystrix
+    args:
+      fallbackUri: 'forward:/fallback'
+      name: default
+  uri: lb://xiaoyuan-upms-admin
+  order: 0
+
+# xiaoyuan-sync
+- id: xiaoyuan-sync
+  predicates:
+  - name: Path
+    args:
+      _genkey_0: /sync/**
+  filters: []
+  uri: lb://xiaoyuan-sync
+  order: 0
+# xiaoyuan-sms
+- id: xiaoyuan-sms
+  predicates:
+  - name: Path
+    args:
+      _genkey_0: /sms/**
+  filters: []
+  uri: lb://xiaoyuan-sms
+  order: 0
+# xiaoyuan-cls
+- id: xiaoyuan-cls
+  predicates:
+  - name: Path
+    args:
+      _genkey_0: /cls/**
+  filters: []
+  uri: lb://xiaoyuan-cls
+  order: 0
+# xiaoyuan-tpm
+- id: xiaoyuan-tpm
+  predicates:
+  - name: Path
+    args:
+      _genkey_0: /tpm/**
+  filters: []
+  uri: lb://xiaoyuan-tpm
+  order: 0
+

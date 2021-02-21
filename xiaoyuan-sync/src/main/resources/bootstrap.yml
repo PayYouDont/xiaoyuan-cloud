@@ -1,0 +1,23 @@
+server:
+  port: 5890
+
+spring:
+  application:
+    name: @artifactId@
+  # 配置中心
+  cloud:
+    #开启服务熔断
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8080
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        heart-beat-timeout: 3000
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        file-extension: yml
+        shared-configs:
+          - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+  profiles:
+    active: dev

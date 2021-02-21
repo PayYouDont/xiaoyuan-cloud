@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+    com.gospell.xiaoyuan.cloud.common.log.LogAutoConfiguration
+org.springframework.context.ApplicationContextInitializer=\
+    com.gospell.xiaoyuan.cloud.common.log.init.ApplicationLoggerInitializer
